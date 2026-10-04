@@ -155,7 +155,7 @@ p{margin:0}
 .garaje .ceja{color:var(--mostaza)}
 .garaje-grid{display:grid;grid-template-columns:1.65fr 1fr;gap:20px}
 .escenario{position:relative;border-radius:var(--radio);overflow:hidden;background:var(--asfalto-2);border:1px solid var(--linea);min-width:0;display:flex;flex-direction:column;justify-content:flex-end;padding-top:72px;--vib:0px}
-.moto-caja{position:relative}
+.moto-caja{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .cartel{position:absolute;top:16px;right:16px;max-width:46%;background:var(--mostaza);color:var(--tinta);font:700 .72rem/1.25 var(--f-maquina);text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-radius:6px;transform:rotate(2.5deg);box-shadow:0 3px 0 var(--sombra)}
 .moto{display:block;width:100%;height:auto;position:relative}
 .escenario.encendida .moto{animation:vibra .07s linear infinite}
@@ -245,8 +245,28 @@ p{margin:0}
 .ficha dt{font:700 .7rem/1 var(--f-maquina);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;color:var(--rojo-hondo)}
 .ficha dd{margin:0;font-weight:600;font-size:.95rem;line-height:1.25}
 .furgo-grid{display:grid;grid-template-columns:1.65fr 1fr;gap:20px;align-items:start}
-.juego-card{background:var(--tinta);border-radius:var(--radio);padding:12px;color:var(--crema);display:grid;gap:10px;min-width:0}
-#furgo-canvas{display:block;width:100%;height:300px;border-radius:10px;touch-action:none;cursor:pointer}
+.juego-card{position:relative;background:var(--tinta);border-radius:var(--radio);padding:12px;color:var(--crema);display:grid;gap:10px;min-width:0;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#furgo-canvas{display:block;width:100%;height:300px;border-radius:10px;touch-action:none;cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+.logro{position:absolute;left:50%;top:24px;transform:translateX(-50%);width:min(460px,calc(100% - 36px));display:flex;gap:12px;align-items:center;background:var(--crema);color:var(--tinta);border-radius:16px;padding:12px 14px;box-shadow:0 6px 0 rgba(0,0,0,.4);z-index:3;animation:logro .5s cubic-bezier(.3,1.6,.5,1);pointer-events:none}
+@keyframes logro{from{transform:translateX(-50%) translateY(-20px) scale(.8);opacity:0}}
+.logro-tit{font:400 1.05rem/1.1 var(--f-display);color:var(--rojo-hondo)}
+.logro-txt{font-size:.9rem;line-height:1.3;margin-top:4px}
+.medalla{flex:none;display:grid;place-items:center;width:50px;height:50px;border-radius:50%;font:700 .85rem/1 var(--f-maquina);color:var(--tinta);border:3px solid rgba(0,0,0,.25)}
+.plata .medalla{background:radial-gradient(circle at 35% 30%,#fff,#c8cdd4 55%,#8e959d)}
+.oro .medalla{background:radial-gradient(circle at 35% 30%,#fff3c0,#f5b31b 55%,#b8860b)}
+.platino .medalla{background:radial-gradient(circle at 35% 30%,#fff,#d9f2f2 45%,#7fb7c2);box-shadow:0 0 14px rgba(160,230,240,.85)}
+.resumen-partida{background:var(--crema);color:var(--tinta);border-radius:14px;padding:14px 16px;display:grid;gap:12px;animation:pop2 .4s cubic-bezier(.3,1.5,.5,1)}
+.resumen-pts{font:700 1.02rem/1.3 var(--f-maquina);color:var(--rojo-hondo)}
+.resumen-logros{display:grid;gap:10px}
+.logro-fila{display:flex;gap:12px;align-items:center}
+.resumen-nada{font-size:.95rem;color:var(--tinta-suave)}
+.vitrina{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0 4px 4px}
+.trofeo{display:flex;gap:8px;align-items:center;background:rgba(255,243,223,.06);border:1px solid var(--linea);border-radius:12px;padding:8px;min-width:0;opacity:.4;filter:grayscale(1);transition:opacity .4s, filter .4s}
+.trofeo.conseguido{opacity:1;filter:none;border-color:var(--mostaza)}
+.trofeo .medalla{width:38px;height:38px;font-size:.72rem}
+.trofeo b{display:block;font-size:.82rem;line-height:1.15}
+.trofeo small{display:block;font-size:.72rem;opacity:.75}
+@media (max-width:560px){.vitrina{grid-template-columns:1fr}}
 .juego-ayuda{font-size:.88rem;opacity:.85;padding:0 6px 4px}
 .check-card{color-scheme:light;background:var(--crema);border-radius:var(--radio);padding:22px;display:grid;gap:14px;min-width:0;box-shadow:6px 6px 0 rgba(35,27,23,.25)}
 .check-card p{color:var(--tinta-suave);font-size:.95rem}
@@ -276,6 +296,10 @@ p{margin:0}
 .riddick-svg.pata .r-pata{transform:none}
 .acciones-r{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .acciones-r .btn{min-height:42px;padding:8px 16px;font-size:.95rem}
+.acciones-tit{font:700 .72rem/1 var(--f-maquina);letter-spacing:.12em;text-transform:uppercase;color:#ffb3a7;margin-top:2px}
+.btn-mal{border-color:#ff8a7a;color:#ffd6cf;background:rgba(158,19,14,.4)}
+.riddick-svg.ofendido .cara{animation:sacude .4s 2}
+.riddick-svg.banado .r-gotas{opacity:1}
 .senorio{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;width:100%;max-width:340px;font:700 .8rem/1 var(--f-maquina);letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums}
 .senorio .medidor{border-color:var(--crema);background:rgba(255,243,223,.12)}
 .senorio .medidor i{background:repeating-linear-gradient(90deg,var(--mostaza) 0 10px,var(--oro) 10px 20px)}
@@ -420,7 +444,7 @@ p{margin:0}
         <a class="btn btn-borde" href="#garaje">Arrancar la Harley</a>
         <a class="btn btn-borde" href="#furgo">Subir a la furgo</a>
       </div>
-      <p class="pista">Elmo tiene cosquillas, pero no abuses, que tiene su genio. Y si escribes <kbd>elmo</kbd> en cualquier parte de la página, sale a rodar.</p>
+      <p class="pista">Elmo tiene cosquillas, pero no abuses, que tiene su genio. Y si escribes <kbd>elmo</kbd> en cualquier parte de la página, sale a rodar. En el móvil: toca tres veces seguidas el logo «3 Rats» de arriba, o toca la moto del garaje.</p>
     </div>
 
     <div class="hero-elmo">
@@ -783,7 +807,7 @@ p{margin:0}
           <button id="btn-claxon" class="btn btn-borde" type="button">Claxon</button>
           <button id="btn-gas" class="btn btn-crema" type="button" disabled>Mantén pulsado para dar gas</button>
         </div>
-        <p class="nota">Suena de verdad: está sintetizado en tu navegador, sin grabaciones.</p>
+        <p class="nota">Suena de verdad: está sintetizado en tu navegador, sin grabaciones. Toca la moto y Elmo saldrá a rodar.</p>
       </div>
     </div>
 
@@ -962,8 +986,18 @@ p{margin:0}
 
     <div class="furgo-grid">
       <div class="juego-card">
+        <div class="logro" id="logro" role="status" hidden><span class="medalla"></span><div><p class="logro-tit"></p><p class="logro-txt"></p></div></div>
         <canvas id="furgo-canvas" tabindex="0" aria-label="Juego Rumbo a la playa: pulsa espacio o toca para saltar con la furgo"></canvas>
-        <p class="juego-ayuda">Espacio, flecha arriba o toque para saltar (mantén para saltar más alto). Recoge flores (+10), símbolos de la paz (+15) y galletas (+25). Esquiva conos, multas, la ITV y las reuniones de coordinación. Riddick va asomado a la ventanilla: no le hagas chocar.</p>
+        <div class="resumen-partida" id="resumen-partida" aria-live="polite" hidden>
+          <p class="resumen-pts"></p>
+          <div class="resumen-logros"></div>
+        </div>
+        <p class="juego-ayuda">Espacio, flecha arriba o toque para saltar (mantén para saltar más alto). Recoge flores (+10), símbolos de la paz (+15) y galletas (+25). Esquiva conos, multas, la ITV y las reuniones de coordinación. Riddick va asomado a la ventanilla: no le hagas chocar. La furgo acelera poco a poco y hay trofeos a los 10.000, 20.000 y 32.000 puntos. La partida no termina hasta que choques: entonces verás tu puntuación y los trofeos conseguidos.</p>
+        <div class="vitrina" id="vitrina" aria-label="Vitrina de trofeos">
+          <div class="trofeo plata" data-id="plata"><span class="medalla">10K</span><span><b>Trofeo de plata</b><small>10.000 puntos</small></span></div>
+          <div class="trofeo oro" data-id="oro"><span class="medalla">20K</span><span><b>Riddickson de oro</b><small>20.000 puntos</small></span></div>
+          <div class="trofeo platino" data-id="platino"><span class="medalla">32K</span><span><b>Loco furgo Platinium</b><small>32.000 puntos</small></span></div>
+        </div>
       </div>
       <div class="check-card">
         <h3>Pachulímetro</h3>
@@ -992,6 +1026,11 @@ p{margin:0}
               <path d="M71 102 Q80 94 89 102 M111 102 Q120 94 129 102" stroke="#8a7a70" stroke-width="2.6" fill="none" stroke-linecap="round"/>
             </g>
             <g class="r-extra r-lengua"><path d="M93 139 Q100 168 107 139 Z" fill="#e46a86"/><path d="M100 142 V158" stroke="#b8445f" stroke-width="1.5"/></g>
+            <g class="r-extra r-gotas" fill="#8fd3ff" stroke="#3a8fc4" stroke-width="1">
+              <path d="M58 56 c3 5 5 8 0 12 c-5 -4 -3 -7 0 -12Z"/><path d="M140 48 c3 5 5 8 0 12 c-5 -4 -3 -7 0 -12Z"/>
+              <path d="M100 34 c3 5 5 8 0 12 c-5 -4 -3 -7 0 -12Z"/><path d="M46 96 c3 5 5 8 0 12 c-5 -4 -3 -7 0 -12Z"/>
+              <path d="M154 98 c3 5 5 8 0 12 c-5 -4 -3 -7 0 -12Z"/><path d="M122 70 c3 5 5 8 0 12 c-5 -4 -3 -7 0 -12Z"/>
+            </g>
             <g class="r-extra r-migas" fill="#c98a3d"><circle cx="84" cy="152" r="2.2"/><circle cx="118" cy="150" r="1.8"/><circle cx="110" cy="162" r="2"/><circle cx="90" cy="164" r="1.6"/></g>
           </g>
           <g class="r-pata">
@@ -1012,7 +1051,14 @@ p{margin:0}
         <button class="btn btn-borde" type="button" data-accion="pata">Pedirle la pata</button>
         <button class="btn btn-borde" type="button" data-accion="anillos">Darle los anillos</button>
       </div>
-      <div class="senorio"><span>Señorío</span><div class="medidor" aria-hidden="true"><i id="senorio-barra" style="width:87%"></i></div><span id="senorio-num">87%</span></div>
+      <p class="acciones-tit">Para que pierda los modales</p>
+      <div class="acciones-r">
+        <button class="btn btn-mal" type="button" data-accion="banar">Bañarle sin avisar</button>
+        <button class="btn btn-mal" type="button" data-accion="disfraz">Disfrazarle de Elmo</button>
+        <button class="btn btn-mal" type="button" data-accion="sofa">Quitarle su sitio del sofá</button>
+        <button class="btn btn-mal" type="button" data-accion="pelota">Fingir que tiras la pelota</button>
+      </div>
+      <div class="senorio"><span>Señorío</span><div class="medidor" aria-hidden="true"><i id="senorio-barra" style="width:50%"></i></div><span id="senorio-num">50%</span></div>
     </div>
 
     <div class="riddick-info">
@@ -1150,7 +1196,7 @@ p{margin:0}
 </footer>
 
 <!-- Bóveda cifrada: generada con cifrador.html. Sin la contraseña es ruido. -->
-<script type="application/json" id="boveda-datos">{"v":1,"kdf":"PBKDF2-SHA512","it":2000000,"salt":"KAH21Crc+3Br+A/D6USAvQ==","iv":"YtLm1FbnodgL7orL","ct":"5/Fn1DfvSJ2b+Sh2LKg5gaYnDr/577IBBuDnc6YdG1QhhbXqR4JAux7/qOuL/BfL0K98L0T37y85LP2eMNbd/wSrx8DnBiIU0vJ4W7odxarVAVZwfOVge4D7dhj/Z0VP6eTpph9eCrlmsKwoOPgALpQoB8O+d3XmsBgPbNgQ50CugGHtr1SV6jpyMUKPwTxP33rz17xYewk6aBhk3zTyw6GLsnMi2hfyIvyLzjcg2hlICpN4/hOthygNu+lJSg/rr8FzHeTLzsgpr71tW607li76qLXUqVrO7Z0BmMRfBE3Bm3NjX3voWbTiAQRqhNc0uDcjDVBFT0amNTg27i4RQqghs0uibNxBoaLxkEMPmQpSdGdHChv8kyCO815qnJ16k6vJYatquAds5SCm4LX2S2nzDfeSm9nZIwwQgJvqNFek/zpHnxopuE6bDgNge+JNMp8FExZg+gHIDAaPP4Sb0M+aUpgTz/wXpGBAXPGXzXkfCZYrZ8+mQTuF95LealGS/pslYIZD8snVQS8Qaew2Bea039fPWlve6MQOXvyhMsqhLepXYROhV+5w8hYehOxNCGUl90R8GYVsCJ4ZR2VaNl0tjk30sIe/L8MF8T3itdr9QessgUKiM1MOc+eG+g3QmeDd+5wKDqaik8XXOslMHyB3I62rWy0aKo4VSUpc70Qhhz7f2KbZ3jOxKPWhJ/FY"}</script>
+<script type="application/json" id="boveda-datos">{"v":1,"kdf":"PBKDF2-SHA512","it":2000000,"salt":"twhJF05FcfQgoTReTmZUcA==","iv":"FTtdhERCjVezH/cz","ct":"mHvWDCutgjIRjZv02cbAtYp2P+dmbVOYM9Im+pa+uY62iFYyncHoOu59XfPug+7CmXY5PNaa4e8Rl82+GdeTKl0CMuhY/u109NWkfY+eLzt/dTpJpIzAnINcW1ckXaBLiSS2Nevga9s3/80Zl0HdqE1tJuDwacqMYDGkk2eRSBeLLybfkrmVBpSrbEG8Kfy46R27Spc+KSFa6R9pFzLeQo+Pe8erGXb7zb4t5AQGdAqQiF+juwWHFF6B6FyRr67rGGzsGWoY98KlMW+Cl0tVj+H3zALogfRG+vMEiVIDzCHnDGE9krAHrEQ7aEx65ZoF4Rsqd+fK/h2H8zuMtaC2tragFqz7UzoZjTl01TY6wsrSkilweNp19ApOE/jlWnYJ5cBp4nwlUSBV5VlKB0pEd7rCFZYV6K5kC4Wj+WmJuAKN7nmNuRKYaVVWnklOHxRNgBIh8sirR/FCM3BvWO081fNm/eTjGKcIfi/ATUDvfbdZwXvlnSR8L4grqOKC5lR6tm+q6M/XLsij25BgmbdMnA2IGYmqt7rwHbrgmzlXLXxbQgmSOHbsTYS2925+0qUu9glP6v/utTD9Hw+vV9UBslEnELBRgFqXSDej4BHOrLwkXVDkYfBjlVXg62nGFKflQY5w7J9/dvrhRZ9y9O/Y+X/sRmgxMDy2onNEveA3Ajd5jDCUDuiUqRWJ+lufXFEM"}</script>
 
 <script>
 (() => {
@@ -1629,12 +1675,25 @@ r4.addEventListener('click', () => {
 /* ---------- Don Riddickson ---------- */
 (function riddick() {
   const svg = $('#riddick-svg'), dice = $('#riddick-dice'), barra = $('#senorio-barra'), num = $('#senorio-num'), retrato = $('#riddick-retrato');
-  let senorio = 87, t = 0, lord = false;
+  let senorio = 50, t = 0, lord = false, perdido = false;
+  function grunidoPerro() {
+    const c = audio(); if (!c) return;
+    const t0 = c.currentTime + 0.02, o = c.createOscillator(), f = c.createBiquadFilter(), g = c.createGain(), lfo = c.createOscillator(), lg = c.createGain();
+    o.type = 'sawtooth'; o.frequency.setValueAtTime(98, t0); o.frequency.linearRampToValueAtTime(82, t0 + 0.9);
+    f.type = 'lowpass'; f.frequency.value = 560; f.Q.value = 3;
+    g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.4, t0 + 0.08); g.gain.setValueAtTime(0.4, t0 + 0.7); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.95);
+    lfo.frequency.value = 22; lg.gain.value = 0.18; lfo.connect(lg).connect(g.gain);
+    o.connect(f).connect(g).connect(master); o.start(t0); lfo.start(t0); o.stop(t0 + 1); lfo.stop(t0 + 1);
+  }
   const ACC = {
-    acariciar: { clase: 'acariciado', suma: 3, frases: ['Mmm. Un poco más a la izquierda, por favor.', 'Don Riddickson acepta la caricia con gran dignidad.', 'Detrás de la oreja. Así se trata a un caballero.'], sonido: () => tono(220, 0.25, 'sine', 0.08, 180) },
-    galleta: { clase: 'galleta', suma: 4, frases: ['Exquisita. Aunque la próxima, en plato de porcelana.', 'Crunch. Es decir: muy amable.', 'Una galleta más y le lego a usted la Renolette.'], sonido: masticar },
-    pata: { clase: 'pata', suma: 2, frases: ['Encantado, caballero.', 'La pata derecha. La izquierda es para el saludo motero.', 'Un placer. Un servidor ya conocía a su familia.'], sonido: () => ladrido(1) },
-    anillos: { clase: 'anillos', suma: 5, frases: ['Custodiaré los anillos con mi vida. Y no me los comeré. Probablemente.', 'Anillos recibidos. Procedo a esconderlos en el sofá.', 'Toñi, Alejandro: los anillos están en buenas patas.'], sonido: () => [988, 1319].forEach((f, i) => tono(f, 0.3, 'sine', 0.08, null, i * 0.12)) }
+    banar: { clase: 'ofendido banado', suma: -7, frases: ['¿Agua? ¿Sin previo aviso? Esto es indigno de un caballero.', 'Un servidor huele a señor, no a champú de coco.', 'Pienso sacudirme encima de su traje de boda.'], sonido: grunidoPerro },
+    disfraz: { clase: 'ofendido', suma: -5, frases: ['Un servidor no es un muñeco de Barrio Sésamo.', '¿Pelo rojo? ¿Yo? Exijo hablar con mi abogado.', 'Elmo puede quedarse su disfraz. Y su risita.'], sonido: grunidoPerro },
+    sofa: { clase: 'ofendido', suma: -8, frases: ['Ese sitio del sofá tiene escrituras a mi nombre.', 'Usurpación de cojín. Esto acabará en los tribunales.', 'Me retiro a la Renolette. No me sigan.'], sonido: grunidoPerro },
+    pelota: { clase: 'ofendido', suma: -4, frases: ['El truco de la pelota falsa. Qué vulgaridad.', 'Corrí tres metros por nada. He perdido la compostura.', 'No volveré a caer. Bueno, quizá una vez más.'], sonido: grunidoPerro },
+    acariciar: { clase: 'acariciado', suma: 4, frases: ['Mmm. Un poco más a la izquierda, por favor.', 'Don Riddickson acepta la caricia con gran dignidad.', 'Detrás de la oreja. Así se trata a un caballero.'], sonido: () => tono(220, 0.25, 'sine', 0.08, 180) },
+    galleta: { clase: 'galleta', suma: 5, frases: ['Exquisita. Aunque la próxima, en plato de porcelana.', 'Crunch. Es decir: muy amable.', 'Una galleta más y le lego a usted la Renolette.'], sonido: masticar },
+    pata: { clase: 'pata', suma: 3, frases: ['Encantado, caballero.', 'La pata derecha. La izquierda es para el saludo motero.', 'Un placer. Un servidor ya conocía a su familia.'], sonido: () => ladrido(1) },
+    anillos: { clase: 'anillos', suma: 6, frases: ['Custodiaré los anillos con mi vida. Y no me los comeré. Probablemente.', 'Anillos recibidos. Procedo a esconderlos en el sofá.', 'Toñi, Alejandro: los anillos están en buenas patas.'], sonido: () => [988, 1319].forEach((f, i) => tono(f, 0.3, 'sine', 0.08, null, i * 0.12)) }
   };
   function pintar() { barra.style.width = senorio + '%'; num.textContent = senorio + '%'; }
   function corazones() {
@@ -1647,17 +1706,24 @@ r4.addEventListener('click', () => {
   }
   $$('[data-accion]').forEach(b => b.addEventListener('click', () => {
     const a = ACC[b.dataset.accion];
-    svg.classList.remove('acariciado', 'galleta', 'pata', 'anillos'); void svg.getBoundingClientRect(); svg.classList.add(a.clase);
-    clearTimeout(t); t = setTimeout(() => svg.classList.remove(a.clase), 1900);
+    const clases = a.clase.split(' ');
+    svg.classList.remove('acariciado', 'galleta', 'pata', 'anillos', 'ofendido', 'banado'); void svg.getBoundingClientRect(); svg.classList.add(...clases);
+    clearTimeout(t); t = setTimeout(() => svg.classList.remove(...clases), 1900);
     const frase = elegir(a.frases.filter(f => f !== dice.textContent));
     dice.textContent = frase;
     if ('speechSynthesis' in window) speechSynthesis.cancel();
-    if (b.dataset.accion === 'pata') a.sonido(); else { ladrido(1 + Math.floor(Math.random() * 2)); setTimeout(a.sonido, 650); }
+    if (a.suma < 0 || b.dataset.accion === 'pata') a.sonido(); else { ladrido(1 + Math.floor(Math.random() * 2)); setTimeout(a.sonido, 650); }
     if (b.dataset.accion === 'acariciar') corazones();
-    senorio = Math.min(100, senorio + a.suma); pintar();
+    senorio = Math.max(0, Math.min(100, senorio + a.suma)); pintar();
+    if (senorio < 100) lord = false;
+    if (senorio > 0) perdido = false;
     if (senorio === 100 && !lord) {
       lord = true;
       setTimeout(() => { dice.textContent = 'Señorío al 100%. Don Riddickson ya puede oficiar la boda.'; confeti(); }, 2000);
+    }
+    if (senorio === 0 && !perdido) {
+      perdido = true;
+      setTimeout(() => { dice.textContent = 'Señorío al 0%. Don Riddickson se ha quitado el monóculo y se va a revolcar en un charco.'; ladrido(3); }, 2000);
     }
   }));
 })();
@@ -1825,10 +1891,63 @@ pintarPregunta();
   }
   function reset() {
     van = { x: Math.min(64, W * 0.1), y: suelo() - VH, vy: 0, enSuelo: true };
-    obs = []; items = []; flotas = []; vel = 330; dist = 0; bonus = 0; tiempo = 0; tObs = 1.3; tItem = 0.8;
+    obs = []; items = []; flotas = []; vel = VEL_MIN; dist = 0; bonus = 0; tiempo = 0; tObs = 1.3; tItem = 0.8;
+    ganados = new Set();
   }
-  const puntos = () => Math.floor(dist / 12) + bonus;
-  function empezar() { reset(); estado = 'jugando'; last = performance.now(); tono(220, 0.25, 'sawtooth', 0.08, 440); requestAnimationFrame(bucle); }
+  const puntos = () => Math.floor(dist / 4) + bonus;
+  /* Trofeos. La velocidad sube poco a poco con los puntos y llega al máximo a los 25.000.
+     Conseguir un trofeo no para la partida: durante el juego sale un aviso breve y,
+     al chocar, se muestran los trofeos de esa partida junto con la puntuación. */
+  const TROFEOS = [
+    { pts: 10000, id: 'plata', nombre: 'Trofeo de plata', txt: 'Ya casi eres un hippy ratón.' },
+    { pts: 20000, id: 'oro', nombre: 'Riddickson de oro', txt: 'Guau, hasta Don Riddickson ha perdido los modales, vaya hippismo veloz que llevas. ¿Loca, conseguirás alcanzar el nivel enfermizo?' },
+    { pts: 32000, id: 'platino', nombre: 'Loco furgo Platinium', txt: '🔥 Te has pasado el juego, Loc@@@. Esta furgo ya no da para más 🔥' }
+  ];
+  const PTS_MAX = 25000, VEL_MIN = 330, VEL_MAX = 760;
+  let ganados = new Set(), tLogro = 0;
+  const vitrina = new Set(leer('rats-trofeos', []));
+  const logroEl = $('#logro'), resumenEl = $('#resumen-partida');
+  const kilo = n => n / 1000 + 'K';
+  function pintarVitrina() { $$('#vitrina .trofeo').forEach(el => el.classList.toggle('conseguido', vitrina.has(el.dataset.id))); }
+  pintarVitrina();
+  function avisoLogro(t) {
+    logroEl.className = 'logro ' + t.id;
+    logroEl.querySelector('.medalla').textContent = kilo(t.pts);
+    logroEl.querySelector('.logro-tit').textContent = '¡Trofeo! ' + t.nombre;
+    logroEl.querySelector('.logro-txt').textContent = 'Sigue sin chocar: el mensaje te espera al final de la partida.';
+    logroEl.hidden = false;
+    clearTimeout(tLogro); tLogro = setTimeout(() => { logroEl.hidden = true; }, 2600);
+    [523, 659, 784, 1047, 1319].forEach((f, i) => tono(f, 0.22, 'triangle', 0.13, null, i * 0.09));
+    if (t.id === 'oro') setTimeout(() => ladrido(2), 500);
+  }
+  function revisarTrofeos() {
+    const p = puntos();
+    for (const t of TROFEOS) {
+      if (p < t.pts || ganados.has(t.id)) continue;
+      ganados.add(t.id); vitrina.add(t.id); guardar('rats-trofeos', [...vitrina]); pintarVitrina();
+      avisoLogro(t);
+    }
+  }
+  function mostrarResumen(p, record) {
+    clearTimeout(tLogro); logroEl.hidden = true;
+    resumenEl.querySelector('.resumen-pts').textContent = `Puntuación conseguida: ${p.toLocaleString('es-ES')} puntos${record ? ' · ¡nuevo récord!' : ''}`;
+    const lista = TROFEOS.filter(t => ganados.has(t.id));
+    const filas = lista.map(t => {
+      const fila = document.createElement('div'), med = document.createElement('span'), caja = document.createElement('div'), tit = document.createElement('p'), txt = document.createElement('p');
+      fila.className = 'logro-fila ' + t.id; med.className = 'medalla'; med.textContent = kilo(t.pts);
+      tit.className = 'logro-tit'; tit.textContent = t.nombre; txt.className = 'logro-txt'; txt.textContent = t.txt;
+      caja.append(tit, txt); fila.append(med, caja); return fila;
+    });
+    if (!filas.length) {
+      const sig = TROFEOS.find(t => p < t.pts), nada = document.createElement('p');
+      nada.className = 'resumen-nada'; nada.textContent = `Ningún trofeo esta vez. El ${sig.nombre.toLowerCase()} está a los ${sig.pts.toLocaleString('es-ES')} puntos.`;
+      filas.push(nada);
+    }
+    resumenEl.querySelector('.resumen-logros').replaceChildren(...filas);
+    resumenEl.hidden = false;
+    if (lista.length) { confeti(); if (lista.some(t => t.id === 'platino')) setTimeout(() => ladrido(3), 600); }
+  }
+  function empezar() { reset(); resumenEl.hidden = true; estado = 'jugando'; last = performance.now(); tono(220, 0.25, 'sawtooth', 0.08, 440); requestAnimationFrame(bucle); }
   function saltar() {
     audio();
     if (estado === 'fin' && performance.now() - finEn < 600) return;
@@ -1839,17 +1958,18 @@ pintarPregunta();
   function soltar() { if (estado === 'jugando' && van.vy < -330) van.vy = -330; }
   function terminar(t) {
     estado = 'fin'; finEn = performance.now(); motivo = t.m;
-    const p = puntos(); if (p > mejor) { mejor = p; guardar('rats-record', mejor); }
+    const p = puntos(), record = p > mejor; if (record) { mejor = p; guardar('rats-record', mejor); }
     golpeRuido(0.45, 0.6, 700); tono(200, 0.5, 'sawtooth', 0.08, 60);
-    dibujar();
+    dibujar(); mostrarResumen(p, record);
   }
   const choca = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
   function actualizar(dt) {
-    tiempo += dt; vel = Math.min(780, 330 + tiempo * 9); dist += vel * dt;
+    const prog = Math.min(1, puntos() / PTS_MAX);
+    tiempo += dt; vel = VEL_MIN + (VEL_MAX - VEL_MIN) * Math.pow(prog, 0.85); dist += vel * dt;
     van.vy += G * dt; van.y += van.vy * dt;
     if (van.y >= suelo() - VH) { van.y = suelo() - VH; van.vy = 0; van.enSuelo = true; }
     tObs -= dt;
-    if (tObs <= 0) { const t = elegir(TIPOS); obs.push({ ...t, x: W + 20 }); tObs = azar(0.9, 1.9) * (420 / vel) + 0.45; }
+    if (tObs <= 0) { const t = elegir(TIPOS); obs.push({ ...t, x: W + 20 }); tObs = azar(0.9, 1.9 - 0.5 * prog) * (420 / vel) + 0.45 - 0.08 * prog; }
     tItem -= dt;
     if (tItem <= 0) {
       const r = Math.random();
@@ -1868,6 +1988,7 @@ pintarPregunta();
         tono(880, 0.08, 'triangle', 0.12); tono(1320, 0.1, 'triangle', 0.1, null, 0.07);
       }
     }
+    revisarTrofeos();
   }
   function bucle(ts) {
     if (estado !== 'jugando') return;
@@ -2012,7 +2133,7 @@ pintarPregunta();
     flotas.forEach(f => { ctx.globalAlpha = Math.min(1, f.t * 2); ctx.font = '700 14px Fredoka, sans-serif'; ctx.fillStyle = C.crema; ctx.textAlign = 'center'; ctx.fillText(f.txt, f.x, f.y); ctx.globalAlpha = 1; });
     ctx.fillStyle = 'rgba(23,19,18,.55)'; rr(10, 10, 150, 30, 8); ctx.fill();
     ctx.font = '700 15px "Courier Prime", monospace'; ctx.fillStyle = C.crema; ctx.textAlign = 'left';
-    ctx.fillText('KM ' + String(puntos()).padStart(5, '0'), 22, 30);
+    ctx.fillText('PUNTOS ' + String(puntos()).padStart(5, '0'), 22, 30);
     ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(23,19,18,.55)'; rr(W - 170, 10, 160, 30, 8); ctx.fill();
     ctx.fillStyle = C.mostaza; ctx.fillText('RÉCORD ' + String(mejor).padStart(5, '0'), W - 22, 30);
     if (estado !== 'jugando') {
@@ -2027,13 +2148,18 @@ pintarPregunta();
       } else {
         textoCentrado('¡Fin del viaje!', 84, '30px Shrikhand, Georgia, serif', C.mostaza, mw);
         const n = textoCentrado(motivo, 118, '500 16px Fredoka, sans-serif', C.crema, mw);
-        textoCentrado(`${puntos()} km · récord ${mejor} km`, 130 + n * 20, '700 15px "Courier Prime", monospace', C.mostaza, mw);
+        textoCentrado(`${puntos().toLocaleString('es-ES')} puntos · récord ${mejor.toLocaleString('es-ES')}`,130 + n * 20, '700 15px "Courier Prime", monospace', C.mostaza, mw);
         textoCentrado('Toca o pulsa espacio para volver a la carretera', 160 + n * 20, '500 15px Fredoka, sans-serif', C.crema, mw);
       }
     }
   }
   cv.addEventListener('pointerdown', e => { e.preventDefault(); cv.focus({ preventScroll: true }); saltar(); });
   window.addEventListener('pointerup', soltar);
+  window.addEventListener('pointercancel', soltar);
+  // En el móvil, mantener pulsado no debe seleccionar texto ni abrir el menú de copiar
+  cv.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+  cv.addEventListener('contextmenu', e => e.preventDefault());
+  cv.closest('.juego-card').addEventListener('selectstart', e => e.preventDefault());
   const escribiendo = () => { const a = document.activeElement; return a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.isContentEditable); };
   window.addEventListener('keydown', e => {
     if (e.code !== 'Space' && e.code !== 'ArrowUp') return;
@@ -2066,6 +2192,15 @@ window.addEventListener('keydown', e => {
     teclas = []; desfile(); hablar('¡Brrrrum! ¡Elmo sale a rodar!', 'normal', false);
   }
 });
+
+/* En el móvil no hay teclado: tres toques seguidos al logo o un toque a la moto del garaje */
+let toquesMarca = [];
+$('.marca').addEventListener('click', e => {
+  const ahora = performance.now();
+  toquesMarca = toquesMarca.filter(t => ahora - t < 1000); toquesMarca.push(ahora);
+  if (toquesMarca.length >= 3) { e.preventDefault(); toquesMarca = []; desfile(); hablar('¡Brrrrum! ¡Elmo sale a rodar!', 'normal', false); }
+});
+$('.moto-caja').addEventListener('click', () => { desfile(); hablar('¡Brrrrum! ¡Elmo sale a rodar!', 'normal', false); });
 
 /* ---------- Bóveda de Óscar ---------- */
 (function boveda() {
